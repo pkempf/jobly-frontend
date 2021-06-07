@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import UserContext from "./UserContext";
+import UserContext from "../UserContext";
 import CompanyCard from "./CompanyCard";
-import SearchBar from "./SearchBar";
-import JoblyApi from "./api";
+import SearchBar from "../SearchBar";
+import JoblyApi from "../api";
 
 const CompanyList = () => {
   const user = useContext(UserContext);
@@ -16,9 +16,9 @@ const CompanyList = () => {
 
     async function getCompanies(filterString = "") {
       try {
-        if (isRendered) {
-          let companies = await JoblyApi.getCompanies(filterString);
-          setCompanies(companies);
+        if (isRendered && user.username) {
+          let companiesRes = await JoblyApi.getCompanies(filterString);
+          setCompanies(companiesRes);
         }
       } catch (e) {
         console.log(e);
@@ -29,7 +29,7 @@ const CompanyList = () => {
     return () => {
       isRendered = false;
     };
-  }, [filter]);
+  }, [filter, user.username]);
 
   if (!user.username) {
     return <Redirect to="/" />;

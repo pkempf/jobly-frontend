@@ -37,13 +37,16 @@ class JoblyApi {
   }
 
   static _setDevTestingToken() {
-    this.token =
+    this.setToken(
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-      "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-      "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+        "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
+        "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc"
+    );
   }
 
   // Individual API routes
+
+  // COMPANIES -------------------------------------
 
   /** Get details on a company by handle. */
 
@@ -62,6 +65,8 @@ class JoblyApi {
     return res.companies;
   }
 
+  // USERS -----------------------------------------
+
   /** Get details on a user by username. */
 
   static async getUser(username) {
@@ -76,23 +81,85 @@ class JoblyApi {
     return res.jobs;
   }
 
+  /** Get a token with username and password */
+
+  static async doLogin(username, password) {
+    try {
+      let res = await this.request(
+        "auth/token",
+        { username, password },
+        "post"
+      );
+
+      this.setToken(res.token);
+      return res.token;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  /** Update a user's information. */
+
+  static async updateUser(username, firstName, lastName, email, password) {
+    try {
+      try {
+        await this.doLogin(username, password);
+      } catch (e) {
+        throw e;
+      }
+      let updatedUser = await this.request(
+        `users/${username}`,
+        { firstName, lastName, password, email },
+        "patch"
+      );
+
+      return updatedUser;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  static async createUser(username, password, firstName, lastName, email) {
+    try {
+      let res = await this.request(
+        "auth/register",
+        { username, password, firstName, lastName, email },
+        "post"
+      );
+      this.setToken(res.token);
+      let createdUser = await this.getUser(username);
+      return { user: createdUser, token: res.token };
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  // JOBS ------------------------------------------
+
   /** Given list of jobs and username, add boolean "applied" to
    *  each job to indicate whether user username has applied */
 
   static async indicateAppliedJobs(listOfJobs, username) {
-    let res = await this.request(`users/${username}`);
-    let listOfAppliedIds = res.user.jobs.map((j) => j.id);
-
+    let user = await this.getUser(username);
     return listOfJobs.map((j) => {
-      return { ...j, applied: listOfAppliedIds.includes(j.id) };
+      return { ...j, applied: user.jobs.includes(j.id) };
     });
   }
-}
 
-// for now, put token ("testuser" / "password" on class)
-JoblyApi.token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-  "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-  "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  /** Given username and job id, have that user apply for that job */
+
+  static async applyForJob(username, jobId) {
+    try {
+      let res = await this.request(
+        `users/${username}/jobs/${jobId}`,
+        {},
+        "post"
+      );
+      return res;
+    } catch (e) {
+      console.log("Couldn't apply for job.");
+    }
+  }
+}
 
 export default JoblyApi;

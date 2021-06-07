@@ -27,7 +27,6 @@ const JoblyForm = ({ formTitle, fields, submitButtonText, processData }) => {
   const getInput = (evt) => {
     evt.preventDefault();
     processData(formData);
-    setFormData(getInitialState(fields));
   };
 
   return (
@@ -40,16 +39,16 @@ const JoblyForm = ({ formTitle, fields, submitButtonText, processData }) => {
               {fields.map((field) => {
                 return (
                   <Form.Group key={field.name} controlId={field.name}>
-                    <Form.Label className="mb-0">{field.label}</Form.Label>
+                    <Form.Label>{field.label}</Form.Label>
                     <Form.Control
                       type={field.inputType}
                       name={field.name}
                       value={formData[field.name] || ""}
                       onChange={handleChange}
                       required={field.required}
+                      placeholder={field.placeholder || ""}
                       readOnly={field.readOnly}
                       style={field.styleOverride || {}}
-                      className="mt-0 mb-4"
                     />
                   </Form.Group>
                 );

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Alert from "react-bootstrap/Alert";
 import AlertContext from "./AlertContext";
 
@@ -8,6 +8,16 @@ const JoblyAlert = () => {
   const clearMessage = () => {
     setMessage({ text: "", variant: "" });
   };
+
+  useEffect(() => {
+    let timeoutToClearMessage = setTimeout(clearMessage, 10000);
+
+    return () => {
+      clearTimeout(timeoutToClearMessage);
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [message]);
 
   if (message.text) {
     return (

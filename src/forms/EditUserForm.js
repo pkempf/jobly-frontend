@@ -50,6 +50,7 @@ const EditUserForm = ({ editUserFunction }) => {
       name: "password",
       label: "Confirm password to make changes",
       inputType: "password",
+      placeholder: "Password",
       initialValue: "",
       required: true,
     },

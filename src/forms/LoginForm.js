@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Redirect } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
 import JoblyForm from "./JoblyForm";
 import UserContext from "../UserContext";
 
@@ -17,6 +16,7 @@ const LoginForm = ({ logInFunction }) => {
       name: "username",
       label: "Username",
       inputType: "text",
+      placeholder: "Username",
       initialValue: "",
       required: true,
     },
@@ -24,13 +24,11 @@ const LoginForm = ({ logInFunction }) => {
       name: "password",
       label: "Password",
       inputType: "password",
+      placeholder: "Password",
       initialValue: "",
       required: true,
     },
   ];
-  const testLoginForm = (formData) => {
-    console.log(formData);
-  };
 
   return (
     <Container className="LoginForm justify-content-center">
@@ -38,15 +36,8 @@ const LoginForm = ({ logInFunction }) => {
         formTitle="Log in"
         fields={formFields}
         submitButtonText="Log in"
-        processData={testLoginForm}
+        processData={logInFunction}
       />
-
-      {
-        // remove this
-      }
-      <Button variant="warning" className="mt-4" onClick={logInFunction}>
-        TEMP_LOGIN
-      </Button>
     </Container>
   );
 };

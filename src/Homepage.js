@@ -7,12 +7,12 @@ const Homepage = () => {
   const user = useContext(UserContext);
   return (
     <Jumbotron className="mt-3 text-center">
-      <h1>
-        <b>Jobly</b>
+      <h1 style={{ fontSize: "72px" }}>
+        <strong>Jobly</strong>
       </h1>
-      <h4 className="mb-4">Let's get to work.</h4>
+      <h4 className="my-4">Let's get to work.</h4>
       {user.username ? (
-        <h3>Welcome back, {user.username}!</h3>
+        <h2>Welcome back, {user.firstName}!</h2>
       ) : (
         <span>
           <Link className="btn btn-primary mr-1" to="/login">

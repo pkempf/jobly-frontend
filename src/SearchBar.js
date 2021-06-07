@@ -20,7 +20,7 @@ const SearchBar = ({ onSubmit }) => {
   return (
     <Form className="SearchBar" onSubmit={getInput}>
       <Form.Row className="align-items-center">
-        <Col xs={8} md={10} className="mr-auto">
+        <Col xs={9} md={10} className="mr-auto">
           <Form.Label htmlFor="searchTerm" srOnly>
             Search Term
           </Form.Label>
@@ -34,7 +34,7 @@ const SearchBar = ({ onSubmit }) => {
           />
         </Col>
         <Col xs="auto" md={2} className="d-flex justify-content-end">
-          <Button type="submit" variant="primary" className="mb-2">
+          <Button type="submit" variant="primary" className="mb-3">
             Search
           </Button>
         </Col>

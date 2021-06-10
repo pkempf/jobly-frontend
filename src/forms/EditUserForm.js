@@ -63,6 +63,7 @@ const EditUserForm = ({ editUserFunction }) => {
         fields={formFields}
         submitButtonText="Save Changes"
         processData={editUserFunction}
+        backButtonTo="/profile"
       />
     </Container>
   );

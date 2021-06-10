@@ -1,11 +1,18 @@
 import React, { useState } from "react";
+import { LinkContainer } from "react-router-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-const JoblyForm = ({ formTitle, fields, submitButtonText, processData }) => {
+const JoblyForm = ({
+  formTitle,
+  fields,
+  submitButtonText,
+  processData,
+  backButtonTo = "",
+}) => {
   const getInitialState = (fields) => {
     let res = {};
     for (let i = 0; i < fields.length; i++) {
@@ -53,9 +60,14 @@ const JoblyForm = ({ formTitle, fields, submitButtonText, processData }) => {
                   </Form.Group>
                 );
               })}
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" className="mr-2">
                 {submitButtonText}
               </Button>
+              {backButtonTo !== "" ? (
+                <LinkContainer to={backButtonTo}>
+                  <Button variant="secondary">Back</Button>
+                </LinkContainer>
+              ) : null}
             </Form>
           </Card.Body>
         </Card>

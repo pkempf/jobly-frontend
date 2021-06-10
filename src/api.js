@@ -74,13 +74,6 @@ class JoblyApi {
     return res.user;
   }
 
-  /** Get a list of jobs, optionally filtering by title */
-
-  static async getJobs(title = "") {
-    let res = await this.request(`jobs/`, title !== "" ? { title } : {});
-    return res.jobs;
-  }
-
   /** Get a token with username and password */
 
   static async doLogin(username, password) {
@@ -135,6 +128,20 @@ class JoblyApi {
   }
 
   // JOBS ------------------------------------------
+
+  /** Get a list of jobs, optionally filtering by title */
+
+  static async getJobs(title = "") {
+    let res = await this.request(`jobs/`, title !== "" ? { title } : {});
+    return res.jobs;
+  }
+
+  /** Get one specific job by id */
+
+  static async getJob(id) {
+    let res = await this.request(`jobs/${id}`);
+    return res.job;
+  }
 
   /** Given list of jobs and username, add boolean "applied" to
    *  each job to indicate whether user username has applied */

@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Homepage from "./Homepage";
 import CompanyList from "./companies/CompanyList";
 import CompanyDetail from "./companies/CompanyDetail";
+import UserProfile from "./users/UserProfile";
 import JobsList from "./jobs/JobsList";
 import LoginForm from "./forms/LoginForm";
 import SignUpForm from "./forms/SignUpForm";
@@ -31,6 +32,9 @@ const Routes = ({ logIn, logOut, signUp, editUser }) => {
         <SignUpForm signUpFunction={signUp} />
       </Route>
       <Route exact path="/profile">
+        <UserProfile />
+      </Route>
+      <Route exact path="/edit-profile">
         <EditUserForm editUserFunction={editUser} />
       </Route>
       <Route exact path="/logout">

@@ -1,11 +1,14 @@
 import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import App from "./App";
+import LoginForm from "./LoginForm";
+import UserContext from "../UserContext";
 
 it("renders without crashing", () => {
   render(
     <MemoryRouter>
-      <App />
+      <UserContext.Provider value={{}}>
+        <LoginForm />
+      </UserContext.Provider>
     </MemoryRouter>
   );
 });
@@ -13,7 +16,9 @@ it("renders without crashing", () => {
 it("matches the snapshot", () => {
   const { asFragment } = render(
     <MemoryRouter>
-      <App />
+      <UserContext.Provider value={{}}>
+        <LoginForm />
+      </UserContext.Provider>
     </MemoryRouter>
   );
   expect(asFragment()).toMatchSnapshot();

@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="UserProfile container"
+  >
+    <div
+      class="row"
+    >
+      <div
+        class="col-sm-8"
+      >
+        <h2>
+          test
+        </h2>
+        <h5>
+           
+        </h5>
+        <p>
+          <a
+            href="mailto:undefined"
+          />
+        </p>
+      </div>
+      <div
+        class="col-sm-4"
+      >
+        <div
+          class="d-flex justify-content-end container"
+        >
+          <a
+            class="ml-auto btn btn-primary"
+            href="/edit-profile"
+          >
+            Edit Profile
+          </a>
+        </div>
+      </div>
+    </div>
+    <h5>
+      Active job applications:
+    </h5>
+    <ul />
+  </div>
+</DocumentFragment>
+`;

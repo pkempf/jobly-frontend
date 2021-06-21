@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches the snapshot 1`] = `
+<DocumentFragment>
+  <a
+    href="/"
+  >
+    Confirm Log Out 
+  </a>
+</DocumentFragment>
+`;

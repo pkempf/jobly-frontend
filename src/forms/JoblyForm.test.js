@@ -1,11 +1,11 @@
 import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import App from "./App";
+import JoblyForm from "./JoblyForm";
 
 it("renders without crashing", () => {
   render(
     <MemoryRouter>
-      <App />
+      <JoblyForm fields={[]} />
     </MemoryRouter>
   );
 });
@@ -13,7 +13,7 @@ it("renders without crashing", () => {
 it("matches the snapshot", () => {
   const { asFragment } = render(
     <MemoryRouter>
-      <App />
+      <JoblyForm fields={[]} />
     </MemoryRouter>
   );
   expect(asFragment()).toMatchSnapshot();

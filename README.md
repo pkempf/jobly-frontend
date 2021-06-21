@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+Note that a live version of this site is available at https://pkempf-jobly.surge.sh
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
